@@ -1,0 +1,40 @@
+<section class="features">
+    <div class="feature-card">
+      <h3>Smart Agricultural Practices</h3>
+      <p>Monitor soil health, predict demand, and optimize resources with IoT and AI.</p>
+      <a href="smart-agriculture.html" class="btn-secondary">Learn More</a>
+    </div>
+  
+      <h2>AI-Driven Demand Forecasting</h2>
+      <p>Automatically fetch data to predict demand in real-time.</p>
+      
+      <button onclick="fetchDataAndPredict()">Fetch Live Data & Predict</button>
+      <div id="forecast-result"></div>
+    
+      <div id="crop-demand-section" style="margin-top: 50px;">
+        <h2>Crop Demand Prediction</h2>
+        <form id="crop-demand-form">
+          <label for="crop-name">Crop Name:</label>
+          <input type="text" id="crop-name" placeholder="Enter your crop name" required>
+      
+          <label for="crop-amount">Amount Available (in kg):</label>
+          <input type="number" id="crop-amount" placeholder="Enter the amount available" required>
+      
+          <label for="city-select">Select a City:</label>
+          <select id="city-select">
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Chennai">Chennai</option>
+          </select>
+      
+          <button type="button" onclick="predictDemand()">Predict Demand</button>
+        </form>
+      
+        <div id="result" style="margin-top: 20px;">
+          <p>Enter details above to see the demand prediction.</p>
+        </div>
+      </div>
+      
+    

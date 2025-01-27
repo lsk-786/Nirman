@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Agricultural Practices</title>
+  <style>
+    /* General Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-image: url('https://source.unsplash.com/1600x900/?farm,technology');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      background: rgba(44, 62, 80, 0.9);
+      color: #ecf0f1;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    header nav {
+      margin-top: 1rem;
+    }
+
+    header nav a {
+      color: #ecf0f1;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    header nav a:hover {
+      color: #2ecc71;
+    }
+
+    main {
+      background-color: rgba(236, 240, 241, 0.95);
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      color: #27ae60;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #34495e;
+    }
+
+    form, div {
+      margin: 1.5rem 0;
+    }
+
+    label {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+    }
+
+    button {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    #result {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(44, 62, 80, 0.9);
+      color: #ecf0f1;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Agricultural Practices</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="waste-management.html">Waste Management</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Crop Demand Prediction</h2>
+      <div>
+        <label for="crop-name">Crop Name:</label>
+        <input type="text" id="crop-name" placeholder="Enter your crop name">
+  
+        <label for="crop-amount">Amount Available (in kg):</label>
+        <input type="number" id="crop-amount" placeholder="Enter the amount available">
+  
+        <label for="city-select">Select a City:</label>
+        <select id="city-select">
+          <option value="Mumbai">Mumbai</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Kolkata">Kolkata</option>
+          <option value="Chennai">Chennai</option>
+        </select>
+  
+        <button onclick="predictDemand()">Predict Demand</button>
+      </div>
+      <div id="result">
+        <p>Enter details above to see the demand prediction.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AgriOptimize. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // OpenWeather API key
+    const API_KEY = "6eeb197f3f85fb9b35e44188e6f12104";
+
+    // Population data for cities
+    const populationData = {
+      Mumbai: 20411000,
+      Delhi: 31181000,
+      Bangalore: 12151000,
+      Kolkata: 14859000,
+      Chennai: 11324000,
+    };
+
+    // Predict demand function
+    function predictDemand() {
+      const cropName = document.getElementById("crop-name").value;
+      const cropAmount = parseFloat(document.getElementById("crop-amount").value);
+      const city = document.getElementById("city-select").value;
+
+      if (!cropName || isNaN(cropAmount) || cropAmount <= 0 || !city) {
+        alert("Please enter valid details.");
+        return;
+      }
+
+      const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+
+      fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+          const temp = data.main.temp;
+          const condition = data.weather[0].description;
+          const population = populationData[city];
+          const demandFactor = temp > 35 ? 0.8 : temp > 20 ? 0.6 : 0.4;
+          const estimatedDemand = Math.ceil((population * demandFactor) / 1000);
+          const surplusOrDeficit = cropAmount - estimatedDemand;
+
+          document.getElementById("result").innerHTML = `
+            <p><strong>Crop:</strong> ${cropName}</p>
+            <p><strong>City:</strong> ${city}</p>
+            <p><strong>Weather:</strong> ${temp}°C, ${condition}</p>
+            <p><strong>Estimated Demand:</strong> ${estimatedDemand} kg</p>
+            <p><strong>Surplus/Deficit:</strong> ${
+              surplusOrDeficit > 0
+                ? `${surplusOrDeficit} kg surplus`
+                : `${Math.abs(surplusOrDeficit)} kg deficit`
+            }</p>
+          `;
+        })
+        .catch(error => {
+          console.error(error);
+          document.getElementById("result").innerHTML = `<p style="color: red;">Error: Could not fetch data. Please try again later.</p>`;
+        });
+    }
+  </script>
+</body>
+</html>

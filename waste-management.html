@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Waste Management</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-image: url('https://source.unsplash.com/1600x900/?food,waste,environment');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      background: rgba(44, 62, 80, 0.9);
+      color: #ecf0f1;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    header nav {
+      margin-top: 1rem;
+    }
+
+    header nav a {
+      color: #ecf0f1;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    header nav a:hover {
+      color: #1abc9c;
+    }
+
+    main {
+      background-color: rgba(236, 240, 241, 0.95);
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #34495e;
+    }
+
+    form {
+      margin: 1.5rem 0;
+    }
+
+    form label {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    form input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+    }
+
+    form button {
+      display: inline-block;
+      background: #1abc9c;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: #16a085;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    li h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    li p {
+      color: #7f8c8d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(44, 62, 80, 0.9);
+      color: #ecf0f1;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      form input,
+      form button {
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Food Waste Management</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="smart-agriculture.html">Smart Agriculture</a>
+      <a href="marketplace.html">Marketplace</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Redistribute Surplus Food</h2>
+      <form id="waste-form">
+        <label for="food-quantity">Surplus Food Quantity (kg):</label>
+        <input type="number" id="food-quantity" placeholder="e.g., 50" required>
+        <label for="expiry">Days Before Expiry:</label>
+        <input type="number" id="expiry" placeholder="e.g., 5" required>
+        <button type="submit">Redistribute</button>
+      </form>
+      <p id="waste-result"></p>
+    </section>
+
+    <section>
+      <h2>Nearby NGOs</h2>
+      <ul id="ngos">
+        <!-- NGO data will be dynamically loaded -->
+        <li>
+          <h3>Helping Hands NGO</h3>
+          <p>Location: New Delhi, India</p>
+          <p>Contact: +91-9876543210</p>
+        </li>
+        <li>
+          <h3>Food for All</h3>
+          <p>Location: Mumbai, India</p>
+          <p>Contact: +91-9123456780</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AgriOptimize. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Example JavaScript for form submission
+    const form = document.getElementById('waste-form');
+    const result = document.getElementById('waste-result');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const quantity = document.getElementById('food-quantity').value;
+      const expiry = document.getElementById('expiry').value;
+
+      if (quantity && expiry) {
+        result.textContent = `You have successfully registered ${quantity} kg of food to be redistributed within ${expiry} days.`;
+        result.style.color = "green";
+      } else {
+        result.textContent = 'Please fill in all fields.';
+        result.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

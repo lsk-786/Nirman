@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace - Farmer & Distributor Interface</title>
+  <style>
+    /* General Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    button.back-btn {
+      background: #34495e;
+      margin-top: 1rem;
+    }
+
+    button.back-btn:hover {
+      background: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #2c3e50;
+      color: #fff;
+    }
+
+    td {
+      background: #f9f9f9;
+    }
+
+    .action-btn {
+      background: #e74c3c;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .action-btn:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Marketplace - Farmer & Distributor Interface</h1>
+  </header>
+
+  <main>
+    <!-- Role Selection Section -->
+    <section id="role-selection" style="display: block;">
+      <h2>Select Your Role</h2>
+      <button onclick="showSection('farmer-section')">Farmer</button>
+      <button onclick="showSection('distributor-section')">Distributor</button>
+    </section>
+
+    <!-- Farmer Section -->
+    <section id="farmer-section" style="display: none;">
+      <h2>Farmer: Enter Crop Details</h2>
+      <form id="farmer-form">
+        <label for="crop-name">Crop Name:</label>
+        <input type="text" id="crop-name" placeholder="Enter your crop name" required>
+        <label for="crop-amount">Amount Available (kg):</label>
+        <input type="number" id="crop-amount" placeholder="Enter amount available" required>
+        <button type="submit">Submit Crop</button>
+      </form>
+
+      <h3>Available Distributor Offers:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Distributor Name</th>
+            <th>Offer Price (per kg)</th>
+            <th>Contact Details</th>
+          </tr>
+        </thead>
+        <tbody id="offers-table">
+          <tr>
+            <td colspan="3">No offers yet.</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="back-btn" onclick="showSection('role-selection')">Back</button>
+    </section>
+
+    <!-- Distributor Section -->
+    <section id="distributor-section" style="display: none;">
+      <h2>Distributor: Submit or Manage Your Offer</h2>
+      <form id="distributor-form">
+        <label for="distributor-name">Your Name:</label>
+        <input type="text" id="distributor-name" placeholder="Enter your name" required>
+        <label for="offer-price">Offer Price (per kg):</label>
+        <input type="number" id="offer-price" placeholder="Enter price per kg" required>
+        <label for="contact-details">Contact Details:</label>
+        <input type="text" id="contact-details" placeholder="Enter your contact or company details" required>
+        <button type="submit">Submit Offer</button>
+      </form>
+
+      <h3>Your Submitted Offers:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Offer Price (per kg)</th>
+            <th>Contact Details</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="your-offers-table">
+          <tr>
+            <td colspan="3">No offers yet.</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="back-btn" onclick="showSection('role-selection')">Back</button>
+    </section>
+  </main>
+
+  <script>
+    // Store all offers
+    const offers = [];
+
+    // Function to show specific sections
+    function showSection(sectionId) {
+      document.querySelectorAll("section").forEach(section => section.style.display = "none");
+      document.getElementById(sectionId).style.display = "block";
+    }
+
+    // Farmer Form Submission
+    document.getElementById("farmer-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Crop details submitted.");
+      updateOffersTable();
+    });
+
+    // Distributor Form Submission
+    document.getElementById("distributor-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const distributorName = document.getElementById("distributor-name").value;
+      const offerPrice = parseFloat(document.getElementById("offer-price").value);
+      const contactDetails = document.getElementById("contact-details").value;
+
+      if (distributorName && offerPrice > 0 && contactDetails) {
+        const offerId = offers.length + 1;
+        offers.push({ id: offerId, distributorName, offerPrice, contactDetails });
+        alert("Offer submitted successfully.");
+        updateOffersTable();
+        updateYourOffersTable();
+      } else {
+        alert("Please fill out all fields.");
+      }
+    });
+
+    // Update Offers Table (visible to farmers)
+    function updateOffersTable() {
+      const offersTable = document.getElementById("offers-table");
+      offersTable.innerHTML = "";
+
+      if (offers.length === 0) {
+        offersTable.innerHTML = `<tr><td colspan="3">No offers yet.</td></tr>`;
+      } else {
+        offers.forEach(offer => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${offer.distributorName}</td>
+            <td>₹${offer.offerPrice.toFixed(2)}</td>
+            <td>${offer.contactDetails}</td>
+          `;
+          offersTable.appendChild(row);
+        });
+      }
+    }
+
+    // Update Distributor's Offers Table
+    function updateYourOffersTable() {
+      const yourOffersTable = document.getElementById("your-offers-table");
+      yourOffersTable.innerHTML = "";
+
+      if (offers.length === 0) {
+        yourOffersTable.innerHTML = `<tr><td colspan="3">No offers yet.</td></tr>`;
+      } else {
+        offers.forEach((offer, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>₹${offer.offerPrice.toFixed(2)}</td>
+            <td>${offer.contactDetails}</td>
+            <td>
+              <button class="action-btn" onclick="editOffer(${index})">Edit</button>
+              <button class="action-btn" onclick="deleteOffer(${index})">Delete</button>
+            </td>
+          `;
+          yourOffersTable.appendChild(row);
+        });
+      }
+    }
+
+    // Edit Offer
+    function editOffer(index) {
+      const offer = offers[index];
+      const newPrice = prompt("Enter new offer price:", offer.offerPrice);
+      const newContact = prompt("Enter new contact details:", offer.contactDetails);
+
+      if (newPrice && newContact) {
+        offer.offerPrice = parseFloat(newPrice);
+        offer.contactDetails = newContact;
+        updateOffersTable();
+        updateYourOffersTable();
+      }
+    }
+
+    // Delete Offer
+    function deleteOffer(index) {
+      offers.splice(index, 1);
+      updateOffersTable();
+      updateYourOffersTable();
+    }
+  </script>
+</body>
+</html>
