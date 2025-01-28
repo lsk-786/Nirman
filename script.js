@@ -122,3 +122,38 @@ function predictDemand() {
 
 // Add event listener to button
 document.getElementById("predict-button").addEventListener("click", predictDemand);
+
+function checkThresholds(temp, humidity, gas) {
+  if (temp > 25) alert("Warning: High Temperature! Food may spoil.");
+  if (humidity > 80) alert("Warning: High Humidity! Mold risk.");
+  if (gas > 500) alert("Warning: High Gas Levels! Spoilage detected.");
+}
+
+async function fetchIoTDataWithAlerts() {
+  const apiKey = "Your_ThingSpeak_Read_API_Key";
+  const channelId = "Your_ThingSpeak_Channel_ID";
+  const url = `https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=1`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const latestEntry = data.feeds[0];
+
+    const temp = parseFloat(latestEntry.field1 || 0);
+    const humidity = parseFloat(latestEntry.field2 || 0);
+    const gas = parseInt(latestEntry.field3 || 0);
+
+    document.getElementById("temp").textContent = temp || "N/A";
+    document.getElementById("humidity").textContent = humidity || "N/A";
+    document.getElementById("gas").textContent = gas || "N/A";
+
+    // Check thresholds
+    checkThresholds(temp, humidity, gas);
+  } catch (error) {
+    console.error("Error fetching IoT data:", error);
+  }
+}
+
+setInterval(fetchIoTDataWithAlerts, 10000);
+fetchIoTDataWithAlerts();
+

@@ -3,54 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgriOptimize - Homepage</title>
+  <title>AgriOptimize</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  
 </head>
 <body>
+  <!-- Header Section -->
   <header>
-    <h1>AgriOptimize</h1>
-    <p>Your solution for optimizing agriculture and food systems with technology.</p>
-    <nav>
-      <a href="smart-agriculture.html">Smart Agriculture</a>
-      <a href="marketplace.html">Marketplace</a>
-      <a href="waste-management.html">Waste Management</a>
-    </nav>
+    <div class="header-container">
+      <h1 class="logo">AgriOptimize</h1>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#about-us">About Us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h2>Welcome to AgriOptimize</h2>
-      <p>Empowering farmers, distributors, and consumers through cutting-edge solutions for sustainability and efficiency.</p>
-      <div class="buttons">
-        <a href="smart-agriculture.html" class="btn">Explore Smart Agriculture</a>
-        <a href="marketplace.html" class="btn">Visit Marketplace</a>
-        <a href="waste-management.html" class="btn">Manage Food Waste</a>
-      </div>
-    </section>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <h2>Welcome to AgriOptimize</h2>
+    <p>Revolutionizing agriculture with technology, sustainability, and innovation.</p>
+  </section>
 
-    <section class="features">
-      <div class="feature-card">
-        <h3>Know the Market Demand</h3>
-        <p>Analyze demand trends with data-driven insights.</p>
-        <a href="demand-forecasting.html" class="btn-secondary">Learn More</a>
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Our Features</h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <img src="assets/icons/smart-agriculture-img.jpg"alt="Smart Agriculture" class="feature-icon">
+        <h3>Smart Agriculture</h3>
+        <p>Utilize IoT and AI for optimized farming.</p>
+        <a href="smart-agriculture.html" class="btn">Explore</a>
       </div>
-
-      <div class="feature-card">
-        <h3>Real-Time Marketplace</h3>
-        <p>Connect farmers, distributors, and buyers for fair pricing and market access.</p>
-        <a href="marketplace.html" class="btn-secondary">Learn More</a>
+      <div class="feature-item">
+        <img src="assets/icons/market-place-icon.jpg" alt="Marketplace" class="feature-icon">
+        <h3>Marketplace</h3>
+        <p>Connect farmers and distributors for fair trade.</p>
+        <a href="marketplace.html" class="btn">Visit</a>
       </div>
-
-      <div class="feature-card">
-        <h3>Food Waste Management</h3>
-        <p>Redistribute surplus food and minimize waste using AI predictions and logistics.</p>
-        <a href="waste-management.html" class="btn-secondary">Learn More</a>
+      <div class="feature-item">
+        <img src="assets/icons/waste-mangement-img.png" alt="Waste Management" class="feature-icon">
+        <h3>Waste Management</h3>
+        <p>Reduce food waste with efficient logistics.</p>
+        <a href="waste-management.html" class="btn">Learn More</a>
       </div>
-    </section>
-  </main>
+      <div class="feature-item">
+        <img src="assets/icons/labour-img.png" alt="Find Labor" class="feature-icon">
+        <h3>Find Skilled Labor</h3>
+        <p>Hire seasonal workers and improve efficiency.</p>
+        <a href="labour.html" class="btn">Find Labor</a>
+      </div>
+    </div>
+  </section>
 
+  <div id="iot-dashboard" style="text-align: center; margin: 50px;">
+    <h2>Food Storage Monitoring</h2>
+    <p>Real-time conditions to prevent food spoilage</p>
+    <div>
+      <p><strong>Temperature:</strong> <span id="temp">Loading...</span> °C</p>
+      <p><strong>Humidity:</strong> <span id="humidity">Loading...</span> %</p>
+      <p><strong>Gas Level:</strong> <span id="gas">Loading...</span></p>
+    </div>
+  </div>
+  
+  <script>
+    async function fetchIoTData() {
+      const apiKey = "Your_ThingSpeak_Read_API_Key";
+      const channelId = "Your_ThingSpeak_Channel_ID";
+      const url = `https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=1`;
+  
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const latestEntry = data.feeds[0];
+  
+        document.getElementById("temp").textContent = latestEntry.field1 || "N/A";
+        document.getElementById("humidity").textContent = latestEntry.field2 || "N/A";
+        document.getElementById("gas").textContent = latestEntry.field3 || "N/A";
+      } catch (error) {
+        console.error("Error fetching IoT data:", error);
+      }
+    }
+  
+    // Fetch data every 10 seconds
+    setInterval(fetchIoTData, 10000);
+    fetchIoTData();
+  </script>
+  
+
+  <!-- About Us Section -->
+  <section id="about-us" class="about-us">
+    <h2>About Us</h2>
+    <p>
+      AgriOptimize is dedicated to bridging the gap between traditional farming and modern technology. 
+      Our mission is to empower farmers, distributors, and consumers to build a sustainable agricultural ecosystem.
+    </p>
+    <p>Join us in creating a better future for agriculture!</p>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 AgriOptimize. All rights reserved.</p>
   </footer>
