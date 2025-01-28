@@ -120,40 +120,36 @@ function predictDemand() {
         });
 }
 
-// Add event listener to button
-document.getElementById("predict-button").addEventListener("click", predictDemand);
-
-function checkThresholds(temp, humidity, gas) {
-  if (temp > 25) alert("Warning: High Temperature! Food may spoil.");
-  if (humidity > 80) alert("Warning: High Humidity! Mold risk.");
-  if (gas > 500) alert("Warning: High Gas Levels! Spoilage detected.");
-}
-
-async function fetchIoTDataWithAlerts() {
-  const apiKey = "Your_ThingSpeak_Read_API_Key";
-  const channelId = "Your_ThingSpeak_Channel_ID";
-  const url = `https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=1`;
+async function fetchIoTData() {
+  const channelID = "2822417"; // Replace with your actual channel ID
+  const apiKey = "1P882O4U5ZO6OM6Z"; // Replace with your Read API Key
+  const url = `https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${apiKey}&results=1`;
 
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const latestEntry = data.feeds[0];
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error("Failed to fetch data from ThingSpeak.");
+      }
 
-    const temp = parseFloat(latestEntry.field1 || 0);
-    const humidity = parseFloat(latestEntry.field2 || 0);
-    const gas = parseInt(latestEntry.field3 || 0);
+      const data = await response.json();
+      if (data.feeds.length === 0) {
+          throw new Error("No data available.");
+      }
 
-    document.getElementById("temp").textContent = temp || "N/A";
-    document.getElementById("humidity").textContent = humidity || "N/A";
-    document.getElementById("gas").textContent = gas || "N/A";
+      const lastEntry = data.feeds[0];
 
-    // Check thresholds
-    checkThresholds(temp, humidity, gas);
+      // Update values on the website
+      document.getElementById("temp").innerText = lastEntry.field1 + "°C";
+      document.getElementById("humidity").innerText = lastEntry.field2 + "%";
+      document.getElementById("gas").innerText = lastEntry.field3;
   } catch (error) {
-    console.error("Error fetching IoT data:", error);
+      console.error("Error fetching data:", error);
+      document.getElementById("temp").innerText = "Error";
+      document.getElementById("humidity").innerText = "Error";
+      document.getElementById("gas").innerText = "Error";
   }
 }
 
-setInterval(fetchIoTDataWithAlerts, 10000);
-fetchIoTDataWithAlerts();
-
+// Fetch data every 15 seconds
+setInterval(fetchIoTData, 15000);
+fetchIoTData(); // Fetch immediately on page load

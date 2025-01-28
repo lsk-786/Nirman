@@ -5,98 +5,230 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marketplace - Farmer & Distributor Interface</title>
   <style>
-    /* General Styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
+   /* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-    body {
-      background-color: #f7f7f7;
-      color: #333;
-    }
+/* Body - Green Themed Background */
+body {
+  background-image:url(assets/icons/farming2.jpg);
+  background-attachment: fixed;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-    header {
-      background: #2c3e50;
-      color: #ecf0f1;
-      padding: 1rem;
-      text-align: center;
-    }
+/* Header - Green Gradient & Effects */
+header {
+  background: linear-gradient(to right, #143214, #6bb66f);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
 
-    header h1 {
-      font-size: 2rem;
-    }
+/* Header Animation */
+header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
+  animation: pulseEffect 6s infinite linear;
+}
 
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-    }
+/* Header Title */
+header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  position: relative;
+  z-index: 1;
+}
+header nav {
+  margin-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
 
-    button {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+header nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+}
 
-    button:hover {
-      background: #219150;
-    }
+header nav a:hover {
+  color: #004d00;
+  transform: scale(1.1);
+}
 
-    button.back-btn {
-      background: #34495e;
-      margin-top: 1rem;
-    }
+/* Main Content */
+main {
+  max-width: 900px;
+  margin: 3rem auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  padding: 3rem;
+  flex: 1; /* Ensures footer stays at the bottom */
+  font-size: 1.3rem; /* Increased Font Size */
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
 
-    button.back-btn:hover {
-      background: #2c3e50;
-    }
+/* Border Animation */
+main::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 15px;
+  background: linear-gradient(45deg, #2e7d32, #66bb6a, #a5d6a7, #2e7d32);
+  background-size: 300% 300%;
+  animation: glowingBorder 6s infinite linear;
+  z-index: -1;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
+/* Buttons */
+button {
+  background: linear-gradient(to right, #43a047, #66bb6a);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
+button:hover {
+  background: #2e7d32;
+  transform: scale(1.05);
+}
 
-    th {
-      background: #2c3e50;
-      color: #fff;
-    }
+/* Back Button */
+button.back-btn {
+  background: #34495e;
+  margin-top: 1rem;
+}
 
-    td {
-      background: #f9f9f9;
-    }
+button.back-btn:hover {
+  background: #2c3e50;
+}
 
-    .action-btn {
-      background: #e74c3c;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.9rem;
-    }
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
 
-    .action-btn:hover {
-      background: #c0392b;
-    }
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(to right, #2e7d32, #66bb6a);
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  background: #f9f9f9;
+}
+
+/* Action Button */
+.action-btn {
+  background: #e74c3c;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.action-btn:hover {
+  background: #c0392b;
+}
+
+/* Footer - Stays at Bottom */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(to right, #6ab16d, #66bb6a);
+  color: white;
+  font-size: 1rem;
+  margin-top: auto;
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for Header */
+@keyframes pulseEffect {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+main:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframe for Border Animation */
+@keyframes glowingBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  main {
+    padding: 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  
+  header h1 {
+    font-size: 2.2rem;
+  }
+}
+
   </style>
 </head>
 <body>
   <header>
     <h1>Marketplace - Farmer & Distributor Interface</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="waste-management.html">Waste Management</a>
+      <a href="labour.html">Find Labours</a>
+    </nav>
   </header>
 
   <main>
@@ -167,6 +299,11 @@
       <button class="back-btn" onclick="showSection('role-selection')">Back</button>
     </section>
   </main>
+   
+  <footer>
+    <p>&copy; 2025 AgriOptimize. All rights reserved.</p>
+  </footer>
+
 
   <script>
     // Store all offers
@@ -268,4 +405,5 @@
     }
   </script>
 </body>
+
 </html>
