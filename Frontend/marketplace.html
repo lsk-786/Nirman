@@ -5,405 +5,258 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marketplace - Farmer & Distributor Interface</title>
   <style>
-   /* General Styling */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+    /* General Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-/* Body - Green Themed Background */
-body {
-  background-image:url(assets/icons/farming2.jpg);
-  background-attachment: fixed;
-  color: #2c3e50;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      font-size: 18px;
+    }
 
-/* Header - Green Gradient & Effects */
-header {
-  background: linear-gradient(to right, #143214, #6bb66f);
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-}
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 28px;
+    }
 
-/* Header Animation */
-header::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
-  animation: pulseEffect 6s infinite linear;
-}
+    main {
+      width: 90%;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
-/* Header Title */
-header h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  position: relative;
-  z-index: 1;
-}
-header nav {
-  margin-top: 1rem;
-  position: relative;
-  z-index: 1;
-}
+    h2 {
+      margin-bottom: 20px;
+    }
 
-header nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  transition: color 0.3s, transform 0.2s;
-}
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
 
-header nav a:hover {
-  color: #004d00;
-  transform: scale(1.1);
-}
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
 
-/* Main Content */
-main {
-  max-width: 900px;
-  margin: 3rem auto;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  padding: 3rem;
-  flex: 1; /* Ensures footer stays at the bottom */
-  font-size: 1.3rem; /* Increased Font Size */
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
+    form {
+      margin-bottom: 30px;
+    }
 
-/* Border Animation */
-main::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  border-radius: 15px;
-  background: linear-gradient(45deg, #2e7d32, #66bb6a, #a5d6a7, #2e7d32);
-  background-size: 300% 300%;
-  animation: glowingBorder 6s infinite linear;
-  z-index: -1;
-}
+    form label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
-/* Buttons */
-button {
-  background: linear-gradient(to right, #43a047, #66bb6a);
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
 
-button:hover {
-  background: #2e7d32;
-  transform: scale(1.05);
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
 
-/* Back Button */
-button.back-btn {
-  background: #34495e;
-  margin-top: 1rem;
-}
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: left;
+      font-size: 18px;
+    }
 
-button.back-btn:hover {
-  background: #2c3e50;
-}
+    table th {
+      background-color: #4CAF50;
+      color: white;
+    }
 
-/* Table Styling */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
+    .action-buttons button {
+      margin-right: 10px;
+    }
 
-th {
-  background: linear-gradient(to right, #2e7d32, #66bb6a);
-  color: white;
-  font-weight: bold;
-}
+    .action-buttons button:hover {
+      background-color: #2196F3;
+    }
 
-td {
-  background: #f9f9f9;
-}
-
-/* Action Button */
-.action-btn {
-  background: #e74c3c;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.action-btn:hover {
-  background: #c0392b;
-}
-
-/* Footer - Stays at Bottom */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: linear-gradient(to right, #6ab16d, #66bb6a);
-  color: white;
-  font-size: 1rem;
-  margin-top: auto;
-  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Animation for Header */
-@keyframes pulseEffect {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-main:hover {
-  transform: scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Keyframe for Border Animation */
-@keyframes glowingBorder {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  main {
-    padding: 2rem;
-    font-size: 1.1rem;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  
-  header h1 {
-    font-size: 2.2rem;
-  }
-}
-
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Marketplace - Farmer & Distributor Interface</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="marketplace.html">Marketplace</a>
-      <a href="waste-management.html">Waste Management</a>
-      <a href="labour.html">Find Labours</a>
-    </nav>
+    Marketplace - Farmer & Distributor Interface
   </header>
 
   <main>
-    <!-- Role Selection Section -->
-    <section id="role-selection" style="display: block;">
+    <!-- Role Selection -->
+    <div id="role-selection">
       <h2>Select Your Role</h2>
       <button onclick="showSection('farmer-section')">Farmer</button>
       <button onclick="showSection('distributor-section')">Distributor</button>
-    </section>
+    </div>
 
     <!-- Farmer Section -->
-    <section id="farmer-section" style="display: none;">
-      <h2>Farmer: Enter Crop Details</h2>
+    <div id="farmer-section" class="hidden">
+      <h2>Farmer Section</h2>
       <form id="farmer-form">
         <label for="crop-name">Crop Name:</label>
-        <input type="text" id="crop-name" placeholder="Enter your crop name" required>
-        <label for="crop-amount">Amount Available (kg):</label>
-        <input type="number" id="crop-amount" placeholder="Enter amount available" required>
-        <button type="submit">Submit Crop</button>
+        <input type="text" id="crop-name" required>
+
+        <label for="crop-quantity">Quantity (kg):</label>
+        <input type="number" id="crop-quantity" required>
+
+        <button type="submit">Submit</button>
       </form>
 
-      <h3>Available Distributor Offers:</h3>
-      <table>
+      <h3>Offers from Distributors:</h3>
+      <table id="farmer-offers">
         <thead>
           <tr>
             <th>Distributor Name</th>
-            <th>Offer Price (per kg)</th>
-            <th>Contact Details</th>
-          </tr>
-        </thead>
-        <tbody id="offers-table">
-          <tr>
-            <td colspan="3">No offers yet.</td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="back-btn" onclick="showSection('role-selection')">Back</button>
-    </section>
-
-    <!-- Distributor Section -->
-    <section id="distributor-section" style="display: none;">
-      <h2>Distributor: Submit or Manage Your Offer</h2>
-      <form id="distributor-form">
-        <label for="distributor-name">Your Name:</label>
-        <input type="text" id="distributor-name" placeholder="Enter your name" required>
-        <label for="offer-price">Offer Price (per kg):</label>
-        <input type="number" id="offer-price" placeholder="Enter price per kg" required>
-        <label for="contact-details">Contact Details:</label>
-        <input type="text" id="contact-details" placeholder="Enter your contact or company details" required>
-        <button type="submit">Submit Offer</button>
-      </form>
-
-      <h3>Your Submitted Offers:</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Offer Price (per kg)</th>
-            <th>Contact Details</th>
+            <th>Offer Price (₹/kg)</th>
+            <th>Contact</th>
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody id="your-offers-table">
+        <tbody>
           <tr>
-            <td colspan="3">No offers yet.</td>
+            <td colspan="4">No offers yet.</td>
           </tr>
         </tbody>
       </table>
-      <button class="back-btn" onclick="showSection('role-selection')">Back</button>
-    </section>
-  </main>
-   
-  <footer>
-    <p>&copy; 2025 AgriOptimize. All rights reserved.</p>
-  </footer>
+      <button onclick="showSection('role-selection')">Back</button>
+    </div>
 
+    <!-- Distributor Section -->
+    <div id="distributor-section" class="hidden">
+      <h2>Distributor Section</h2>
+      <form id="distributor-form">
+        <label for="distributor-name">Your Name:</label>
+        <input type="text" id="distributor-name" required>
+
+        <label for="offer-price">Offer Price (₹/kg):</label>
+        <input type="number" id="offer-price" required>
+
+        <label for="contact-info">Contact Info:</label>
+        <input type="text" id="contact-info" required>
+
+        <button type="submit">Submit Offer</button>
+      </form>
+
+      <h3>Latest Offers:</h3>
+      <table id="distributor-offers">
+        <thead>
+          <tr>
+            <th>Crop Name</th>
+            <th>Quantity</th>
+            <th>Offer Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3">No crops submitted yet.</td>
+          </tr>
+        </tbody>
+      </table>
+      <button onclick="showSection('role-selection')">Back</button>
+    </div>
+  </main>
 
   <script>
-    // Store all offers
-    const offers = [];
-
-    // Function to show specific sections
+    // Show specific section based on role
     function showSection(sectionId) {
-      document.querySelectorAll("section").forEach(section => section.style.display = "none");
-      document.getElementById(sectionId).style.display = "block";
+      document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById(sectionId).classList.remove('hidden');
     }
 
+    const farmerOffersTable = document.getElementById('farmer-offers').querySelector('tbody');
+    const distributorOffersTable = document.getElementById('distributor-offers').querySelector('tbody');
+
     // Farmer Form Submission
-    document.getElementById("farmer-form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Crop details submitted.");
-      updateOffersTable();
+    document.getElementById('farmer-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const cropName = document.getElementById('crop-name').value;
+      const cropQuantity = document.getElementById('crop-quantity').value;
+
+      // Add new crop details to the distributor table
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${cropName}</td>
+        <td>${cropQuantity} kg</td>
+        <td>Awaiting Offers</td>
+      `;
+      distributorOffersTable.prepend(newRow);
+
+      alert(`Crop "${cropName}" (${cropQuantity} kg) added!`);
     });
 
     // Distributor Form Submission
-    document.getElementById("distributor-form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const distributorName = document.getElementById("distributor-name").value;
-      const offerPrice = parseFloat(document.getElementById("offer-price").value);
-      const contactDetails = document.getElementById("contact-details").value;
+    document.getElementById('distributor-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const distributorName = document.getElementById('distributor-name').value;
+      const offerPrice = document.getElementById('offer-price').value;
+      const contactInfo = document.getElementById('contact-info').value;
 
-      if (distributorName && offerPrice > 0 && contactDetails) {
-        const offerId = offers.length + 1;
-        offers.push({ id: offerId, distributorName, offerPrice, contactDetails });
-        alert("Offer submitted successfully.");
-        updateOffersTable();
-        updateYourOffersTable();
-      } else {
-        alert("Please fill out all fields.");
-      }
+      // Add distributor's offer to farmer table
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${distributorName}</td>
+        <td>₹${offerPrice}</td>
+        <td>${contactInfo}</td>
+        <td class="action-buttons">
+          <button onclick="acceptOffer()">Accept</button>
+          <button onclick="counterOffer(this)">Counter</button>
+        </td>
+      `;
+      farmerOffersTable.prepend(newRow);
+
+      alert('Offer submitted successfully!');
     });
 
-    // Update Offers Table (visible to farmers)
-    function updateOffersTable() {
-      const offersTable = document.getElementById("offers-table");
-      offersTable.innerHTML = "";
-
-      if (offers.length === 0) {
-        offersTable.innerHTML = `<tr><td colspan="3">No offers yet.</td></tr>`;
-      } else {
-        offers.forEach(offer => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${offer.distributorName}</td>
-            <td>₹${offer.offerPrice.toFixed(2)}</td>
-            <td>${offer.contactDetails}</td>
-          `;
-          offersTable.appendChild(row);
-        });
-      }
+    // Action buttons
+    function acceptOffer() {
+      alert('You have accepted the offer!');
     }
 
-    // Update Distributor's Offers Table
-    function updateYourOffersTable() {
-      const yourOffersTable = document.getElementById("your-offers-table");
-      yourOffersTable.innerHTML = "";
+    function counterOffer(button) {
+      // Prompt for counteroffer price
+      const counterOfferPrice = prompt("Enter your counter offer price per kg:");
+      if (counterOfferPrice) {
+        // Update the offer price in the table
+        const row = button.closest('tr');
+        const priceCell = row.querySelectorAll('td')[1]; // second cell (Offer Price)
+        priceCell.innerText = `₹${counterOfferPrice}`;
 
-      if (offers.length === 0) {
-        yourOffersTable.innerHTML = `<tr><td colspan="3">No offers yet.</td></tr>`;
-      } else {
-        offers.forEach((offer, index) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>₹${offer.offerPrice.toFixed(2)}</td>
-            <td>${offer.contactDetails}</td>
-            <td>
-              <button class="action-btn" onclick="editOffer(${index})">Edit</button>
-              <button class="action-btn" onclick="deleteOffer(${index})">Delete</button>
-            </td>
-          `;
-          yourOffersTable.appendChild(row);
-        });
+        alert(`Counter offer of ₹${counterOfferPrice} submitted successfully!`);
       }
-    }
-
-    // Edit Offer
-    function editOffer(index) {
-      const offer = offers[index];
-      const newPrice = prompt("Enter new offer price:", offer.offerPrice);
-      const newContact = prompt("Enter new contact details:", offer.contactDetails);
-
-      if (newPrice && newContact) {
-        offer.offerPrice = parseFloat(newPrice);
-        offer.contactDetails = newContact;
-        updateOffersTable();
-        updateYourOffersTable();
-      }
-    }
-
-    // Delete Offer
-    function deleteOffer(index) {
-      offers.splice(index, 1);
-      updateOffersTable();
-      updateYourOffersTable();
     }
   </script>
 </body>
-
 </html>
