@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cold Storage Finder</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    /* Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #e6ffee, #ccffcc);
+  overflow-x: hidden;
+  animation: backgroundShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes backgroundShift {
+  0% { background: linear-gradient(135deg, #e6ffee, #ccffcc); }
+  100% { background: linear-gradient(135deg, #d4ffea, #b3ffb3); }
+}
+
+h1 {
+  text-align: center;
+  color: #32a852;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(50, 168, 82, 0.6);
+  animation: glow 2s infinite alternate ease-in-out;
+}
+header {
+  background: linear-gradient(to right, #02240b, #b0e57c);
+  padding: 2rem 2rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Center the Logo */
+  header .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  }
+  
+  /* Center the Nav Links */
+  header .nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+  }
+  
+  header .nav-links a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.3s ease, transform 0.2s ease;
+  }
+  
+  header .nav-links a:hover {
+  color: #004d00;
+  transform: scale(1.1);
+  }
+  
+
+@keyframes glow {
+  0% { text-shadow: 0 0 10px rgba(50, 168, 82, 0.4); }
+  100% { text-shadow: 0 0 20px rgba(50, 168, 82, 0.9); }
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  gap: 10px;
+}
+
+.search-container input {
+  padding: 12px;
+  width: 320px;
+  border: 2px solid #32a852;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  background: #fafffa;
+  box-shadow: inset 0 0 10px rgba(50, 168, 82, 0.2);
+}
+
+.search-container input:hover,
+.search-container input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 12px rgba(50, 168, 82, 0.4);
+  transform: scale(1.05);
+}
+
+.search-container button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #32a852, #28a745);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-container button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.3s ease-in-out;
+}
+
+.search-container button:hover::after {
+  left: 100%;
+}
+
+.search-container button:hover {
+  background: linear-gradient(135deg, #28a745, #1e9e5f);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Map Container */
+#map {
+  height: 500px;
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid #32a852;
+  box-shadow: 0 0 20px rgba(50, 168, 82, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Results Section */
+#result-container {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  border: 2px solid #32a852;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  display: none;
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #e8f5e9, #d4ffd9);
+  border-left: 4px solid #32a852;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-item:hover {
+  background: linear-gradient(135deg, #c8e6c9, #b2ffc0);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-item h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #32a852;
+  text-transform: uppercase;
+}
+
+.result-item p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Loading Animation */
+.loader {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #32a852;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Marker Animation */
+.leaflet-marker-icon {
+  animation: bounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-5px); }
+}
+
+  </style>
+</head>
+<body>
+    <Header>
+        <h1>Cold Storage Finder</h1>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#about-us">About Us</a>
+            <a href="#contact">Contact</a>
+            <a href="#iot-data">Climate</a>
+            <a href="courses.html">Smart Farming Techniques</a>
+            <a href="login.html">Login</a>
+          </nav>
+    </Header>
+  
+  
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search for a city or storage">
+    <button onclick="searchColdStorages()">Search</button>
+  </div>
+  <div id="map"></div>
+  <div id="result-container" style="display: none;">
+    <h3 style="text-align: center; color: #32a852;">Nearby Cold Storages</h3>
+    <div id="result-list"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map
+    const map = L.map('map').setView([20.5937, 78.9629], 5);
+
+    // Add OSM Tile Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Cold Storage Locations
+    const coldStorageLocations = [
+      { name: "Cold Storage A", lat: 28.7041, lng: 77.1025, city: "Delhi", state: "Delhi", contact: "9876543210" },
+      { name: "Cold Storage B", lat: 28.6919, lng: 77.2127, city: "Delhi", state: "Delhi", contact: "9876543211" },
+      { name: "Cold Storage D", lat: 19.076, lng: 72.8777, city: "Mumbai", state: "Maharashtra", contact: "9123456789" },
+      { name: "Cold Storage F", lat: 22.5726, lng: 88.3639, city: "Kolkata", state: "West Bengal", contact: "9988776655" }
+    ];
+
+    let markers = [];
+
+    // Calculate distance (Haversine formula)
+    function calculateDistance(lat1, lng1, lat2, lng2) {
+      const R = 6371; // Earth radius in km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    // Clear markers
+    function clearMarkers() {
+      markers.forEach(marker => map.removeLayer(marker));
+      markers = [];
+    }
+
+    // Search cold storages
+    function searchColdStorages() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      clearMarkers();
+
+      const reference = coldStorageLocations.find(loc => loc.city.toLowerCase() === query);
+      if (!reference) {
+        document.getElementById('result-container').style.display = 'block';
+        document.getElementById('result-list').innerHTML = '<p>No cold storages found.</p>';
+        return;
+      }
+
+      const nearbyLocations = coldStorageLocations.filter(loc => calculateDistance(reference.lat, reference.lng, loc.lat, loc.lng) <= 20);
+      map.setView([reference.lat, reference.lng], 12);
+
+      nearbyLocations.forEach(location => {
+        const marker = L.marker([location.lat, location.lng])
+          .bindPopup(`<b>${location.name}</b><br>${location.city}, ${location.state}<br>Contact: ${location.contact}`)
+          .addTo(map);
+        markers.push(marker);
+      });
+
+      displayResults(nearbyLocations);
+    }
+
+    // Display results
+    function displayResults(locations) {
+      const resultList = document.getElementById('result-list');
+      resultList.innerHTML = '';
+      locations.forEach(loc => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        item.innerHTML = `<h4>${loc.name}</h4><p>${loc.city}, ${loc.state}</p><p>Contact: ${loc.contact}</p>`;
+        resultList.appendChild(item);
+      });
+      document.getElementById('result-container').style.display = 'block';
+    }
+
+    // Search on 'Enter' key
+    document.getElementById('search-input').addEventListener('keypress', e => {
+      if (e.key === 'Enter') searchColdStorages();
+    });
+  </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-/* General Styles */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -6,55 +5,56 @@ body {
   line-height: 1.7;
   color: #2c3e50;
   background: #f9fdfb;
-}
-
-a {
+  background-image: url(assets/icons/farming2.jpg);
+  }
+  
+  a {
   text-decoration: none;
-  color: inherit;
+  color: rgb(18, 53, 18);
   transition: color 0.3s ease-in-out;
-}
-
-/* Header */
-header {
+  }
+  
+  /* Header */
+  header {
   background: linear-gradient(to right, #02240b, #b0e57c);
   padding: 2rem 2rem;
   text-align: center;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Center the Logo */
-header .logo {
+  }
+  
+  /* Center the Logo */
+  header .logo {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
   display: inline-block;
-}
-
-/* Center the Nav Links */
-header .nav-links {
+  }
+  
+  /* Center the Nav Links */
+  header .nav-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
   margin-top: 0.5rem;
-}
-
-header .nav-links a {
+  }
+  
+  header .nav-links a {
   font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
   transition: color 0.3s ease, transform 0.2s ease;
-}
-
-header .nav-links a:hover {
+  }
+  
+  header .nav-links a:hover {
   color: #004d00;
   transform: scale(1.1);
-}
-
-/* Hero Section */
-.hero {
+  }
+  
+  /* Hero Section */
+  .hero {
   background: url('assets/icons/farming2.jpg') no-repeat center center/cover;
   color: white;
   text-align: center;
@@ -66,40 +66,40 @@ header .nav-links a:hover {
   align-items: center;
   background-blend-mode:normal;
   background-color: rgba(0, 128, 0, 0.3);
-}
-
-.hero h2 {
+  }
+  
+  .hero h2 {
   font-size: 3.5rem;
   margin-bottom: 1.2rem;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.hero p {
+  }
+  
+  .hero p {
   font-size: 1.4rem;
   max-width: 750px;
-}
-
-/* Features Section */
-.features {
+  }
+  
+  /* Features Section */
+  .features {
   background: #e9f5e9;
   padding: 4rem 2rem;
   text-align: center;
-}
-
-.features h2 {
+  }
+  
+  .features h2 {
   font-size: 2.5rem;
   margin-bottom: 2.5rem;
   color: #2c3e50;
-}
-
-.feature-list {
+  }
+  
+  .feature-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2.5rem;
-}
-
-.feature-item {
+  }
+  
+  .feature-item {
   background: white;
   padding: 2rem;
   border-radius: 15px;
@@ -107,29 +107,29 @@ header .nav-links a:hover {
   text-align: center;
   max-width: 280px;
   transition: transform 0.3s ease;
-}
-
-.feature-item:hover {
+  }
+  
+  .feature-item:hover {
   transform: translateY(-5px);
-}
-
-.feature-item img.feature-icon {
+  }
+  
+  .feature-item img.feature-icon {
   width: 80px;
   margin-bottom: 1rem;
-}
-
-.feature-item h3 {
+  }
+  
+  .feature-item h3 {
   font-size: 1.5rem;
   margin-bottom: 0.8rem;
   color: #2e7d32;
-}
-
-.feature-item p {
+  }
+  
+  .feature-item p {
   font-size: 1.1rem;
   margin-bottom: 1rem;
-}
-
-.feature-item .btn {
+  }
+  
+  .feature-item .btn {
   background: #77dd77;
   color: white;
   padding: 0.7rem 1.2rem;
@@ -137,42 +137,42 @@ header .nav-links a:hover {
   font-size: 1rem;
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.feature-item .btn:hover {
+  }
+  
+  .feature-item .btn:hover {
   background: #2e7d32;
   transform: scale(1.05);
-}
-
-/* About Us Section */
-.about-us {
+  }
+  
+  /* About Us Section */
+  .about-us {
   background: linear-gradient(to bottom, #b0e57c, #77dd77);
   color: white;
   text-align: center;
   padding: 4rem 2rem;
-}
-
-.about-us h2 {
+  }
+  
+  .about-us h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-}
-
-.about-us p {
+  }
+  
+  .about-us p {
   font-size: 1.2rem;
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.8;
-}
-
-/* IoT Data Section */
-#iot-data {
+  }
+  
+  /* IoT Data Section */
+  #iot-data {
   text-align: center;
   padding: 2.5rem;
   background: #f5fff5;
   border-top: 3px solid #77dd77;
-}
-
-.sensor-card {
+  }
+  
+  .sensor-card {
   display: inline-block;
   background: white;
   padding: 1.5rem;
@@ -181,29 +181,29 @@ header .nav-links a:hover {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   min-width: 150px;
   transition: transform 0.3s ease;
-}
-
-.sensor-card:hover {
+  }
+  
+  .sensor-card:hover {
   transform: translateY(-5px);
-}
-
-/* Footer */
-footer {
+  }
+  
+  /* Footer /
+  footer {
   background: #2c3e50;
   color: #ecf0f1;
   text-align: center;
   padding: 1.5rem;
   font-size: 1rem;
-}
-/* Contact Section */
-.contact-section {
+  }
+  / Contact Section */
+  .contact-section {
   background: linear-gradient(135deg, #eaf4e3, #d4e9c4);
   padding: 4rem 2rem;
   text-align: center;
   border-top: 2px solid #77dd77;
-}
-
-.contact-header {
+  }
+  
+  .contact-header {
   font-size: 2.8rem;
   font-weight: bold;
   color: #2c3e50;
@@ -212,10 +212,10 @@ footer {
   display: inline-block;
   padding-bottom: 0.5rem;
   margin-bottom: 2rem;
-}
-
-/* Header Effect */
-.contact-header::after {
+  }
+  
+  /* Header Effect */
+  .contact-header::after {
   content: "";
   width: 80px;
   height: 4px;
@@ -225,27 +225,27 @@ footer {
   bottom: -5px;
   transform: translateX(-50%);
   border-radius: 2px;
-}
-
-/* Contact Container */
-.contact-container {
+  }
+  
+  /* Contact Container */
+  .contact-container {
   max-width: 600px;
   margin: 0 auto;
   background: white;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Contact Items */
-.contact-info {
+  }
+  
+  /* Contact Items */
+  .contact-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-}
-
-.contact-item {
+  }
+  
+  .contact-item {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -253,25 +253,154 @@ footer {
   font-weight: 500;
   color: #2c3e50;
   transition: transform 0.3s ease;
-}
-
-.contact-item img {
+  }
+  
+  .contact-item img {
   width: 25px;
   height: 25px;
   filter: grayscale(40%);
-}
-
-/* Hover Effect */
-.contact-item:hover {
+  }
+  
+  /* Hover Effect */
+  .contact-item:hover {
   transform: translateY(-3px);
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
   .contact-container {
-      padding: 1.5rem;
+  padding: 1.5rem;
   }
   .contact-header {
-      font-size: 2.2rem;
+  font-size: 2.2rem;
   }
-}
+  }
+
+  #login {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to right, #000000, #FFD700); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  
+  /* Login Form Container */
+  #login-form {
+  padding: 4% 6%;
+  background: linear-gradient(135deg, #111, #333);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Animated Border */
+  #login-form::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #FFD700, #ffcc00, #FFD700);
+  z-index: -1;
+  border-radius: 12px;
+  animation: borderGlow 3s linear infinite alternate;
+  }
+  
+  /* Header Styling */
+  header{
+
+  
+  color: #FFD700;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.6);
+  }
+  
+  #login-form h1 a:hover {
+  text-decoration: underline;
+  color: #ffcc00;
+  }
+  
+  /* Subtitle */
+  #login-form h3 {
+  font-weight: bold;
+  padding-top: 30px;
+  color: #FFD700;
+  }
+  
+  /* Paragraph */
+  #login-form p {
+  color: #CCCCCC;
+  font-size: 1rem;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+  color: #000;
+  padding: 12px 50px;
+  background: linear-gradient(45deg, #FFD700, #ffcc00);
+  border-radius: 25px;
+  margin-top: 30px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+  }
+  
+  .submit-btn:hover {
+  background: linear-gradient(45deg, #ffcc00, #FFD700);
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.7);
+  }
+  
+  /* Additional Links */
+  #login-form .extra {
+  text-align: center;
+  padding-top: 20px;
+  color: #AAAAAA;
+  }
+  
+  #login-form a {
+  color: #FFD700;
+  text-decoration: underline;
+  font-weight: bold;
+  }
+  
+  /* Login Image Section */
+  #login-img {
+  position: relative;
+  bottom: 0;
+  background: linear-gradient(45deg, #000, #FFD700);
+  padding: 8% 6%;
+  border-radius: 12px;
+  text-align: center;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+  from {
+  opacity: 0;
+  transform: translateY(-20px);
+  }
+  to {
+  opacity: 1;
+  transform: translateY(0);
+  }
+  }
+  
+  @keyframes borderGlow {
+  0% {
+  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+  box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.9);
+  }
+  }

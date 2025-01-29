@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micro-Biorefineries Booking</title>
+  
+  <style>
+  /* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f4f9f4, #e8f0e8);
+  color: #333;
+  animation: backgroundFade 6s infinite alternate;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background: #4caf50;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+main {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.form-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.6s ease-out;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #4caf50;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group .tooltip {
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #4caf50;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.submit-btn {
+  background: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.submit-btn:hover {
+  background: #45a049;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backgroundFade {
+  from {
+    background: linear-gradient(135deg, #f4f9f4, #e8f0e8);
+  }
+  to {
+    background: linear-gradient(135deg, #e8f0e8, #f4f9f4);
+  }
+}
+
+  </style>
+</head>
+>
+<body>
+  <header>
+    <h1>Micro-Biorefineries Booking System</h1>
+    <p>Turning waste into value—efficiently and sustainably.</p>
+  </header>
+  
+  <main>
+    <section class="form-container">
+      <form id="bookingForm" class="fade-in">
+        <h2>Book a Biorefinery Service</h2>
+
+        <!-- Farmer Details -->
+        <div class="form-group">
+          <label for="farmerName">Farmer Name <span class="tooltip" title="Enter your full name.">?</span></label>
+          <input type="text" id="farmerName" name="farmerName" placeholder="John Doe" required />
+        </div>
+
+        <!-- Waste Details -->
+        <div class="form-group">
+          <label for="wasteType">Type of Waste</label>
+          <select id="wasteType" name="wasteType" required>
+            <option value="" disabled selected>Select Waste Type</option>
+            <option value="organic">Organic Waste</option>
+            <option value="crop">Crop Residue</option>
+            <option value="animal">Animal Waste</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="wasteAmount">Amount of Waste (in kg)</label>
+          <input type="number" id="wasteAmount" name="wasteAmount" placeholder="e.g., 500" required />
+        </div>
+
+        <!-- Location -->
+        <div class="form-group">
+          <label for="location">Your Location</label>
+          <input type="text" id="location" name="location" placeholder="City or Village Name" required />
+        </div>
+
+        <!-- Biorefinery Selection -->
+        <div class="form-group">
+          <label for="biorefinery">Select Biorefinery</label>
+          <select id="biorefinery" name="biorefinery" required>
+            <!-- Options dynamically added from the backend -->
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Book Now</button>
+      </form>
+    </section>
+
+    <!-- Response Modal -->
+    <div id="responseModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="responseMessage"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Micro-Biorefineries Initiative. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

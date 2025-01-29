@@ -153,3 +153,52 @@ async function fetchIoTData() {
 // Fetch data every 15 seconds
 setInterval(fetchIoTData, 15000);
 fetchIoTData(); // Fetch immediately on page load
+
+document.addEventListener("DOMContentLoaded", () => {
+  const biorefinerySelect = document.getElementById("biorefinery");
+  const bookingForm = document.getElementById("bookingForm");
+  const responseMessage = document.getElementById("responseMessage");
+
+  // Fetch available biorefineries
+  fetch("http://localhost:3000/api/biorefineries")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((biorefinery) => {
+        const option = document.createElement("option");
+        option.value = biorefinery.name;
+        option.textContent = `${biorefinery.name} (${biorefinery.location})`;
+        biorefinerySelect.appendChild(option);
+      });
+    })
+    .catch((error) => console.error("Error fetching biorefineries:", error));
+
+  // Handle form submission
+  bookingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = {
+      farmerName: document.getElementById("farmerName").value,
+      wasteType: document.getElementById("wasteType").value,
+      wasteAmount: document.getElementById("wasteAmount").value,
+      location: document.getElementById("location").value,
+      biorefinery: document.getElementById("biorefinery").value,
+    };
+
+    fetch("http://localhost:3000/api/book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        responseMessage.textContent = data.message;
+        bookingForm.reset();
+      })
+      .catch((error) => {
+        responseMessage.textContent = "Error submitting booking.";
+        console.error("Error:", error);
+      });
+  });
+});
