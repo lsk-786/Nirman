@@ -5,7 +5,7 @@ body {
   line-height: 1.7;
   color: #2c3e50;
   background: #f9fdfb;
-  background-image: url(assets/icons/farming2.jpg);
+  background-image: url();
   }
   
   a {
@@ -187,7 +187,7 @@ body {
   transform: translateY(-5px);
   }
   
-  /* Footer /
+  /* Footer */
   footer {
   background: #2c3e50;
   color: #ecf0f1;
@@ -195,7 +195,7 @@ body {
   padding: 1.5rem;
   font-size: 1rem;
   }
-  / Contact Section */
+  /* Contact Section */
   .contact-section {
   background: linear-gradient(135deg, #eaf4e3, #d4e9c4);
   padding: 4rem 2rem;
@@ -395,12 +395,52 @@ body {
   transform: translateY(0);
   }
   }
-  
   @keyframes borderGlow {
-  0% {
-  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+    0% {
+      box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+    }
+    100% {
+      box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.9);
+    }
   }
-  100% {
-  box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.9);
+  
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    color: #333;
   }
-  }
+  
+.container {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#weather-result {
+    margin-top: 20px;
+}

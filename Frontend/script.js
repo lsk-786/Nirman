@@ -132,73 +132,29 @@ async function fetchIoTData() {
       }
 
       const data = await response.json();
-      if (data.feeds.length === 0) {
+      console.log("API Response:", data); // Debugging step
+
+      if (!data.feeds || data.feeds.length === 0) {
           throw new Error("No data available.");
       }
 
       const lastEntry = data.feeds[0];
 
-      // Update values on the website
-      document.getElementById("temp").innerText = lastEntry.field1 + "°C";
-      document.getElementById("humidity").innerText = lastEntry.field2 + "%";
-      document.getElementById("gas").innerText = lastEntry.field3;
+      // Check if field4 exists before updating the DOM
+      document.getElementById("temp").innerText = lastEntry.field1 ? lastEntry.field1 + "°C" : "N/A";
+      document.getElementById("humidity").innerText = lastEntry.field2 ? lastEntry.field2 + "%" : "N/A";
+      document.getElementById("gas").innerText = lastEntry.field3 ? lastEntry.field3 : "N/A";
+      document.getElementById("soilMoisture").innerText = lastEntry.field4 ? lastEntry.field4 + "%" : "N/A";
+
   } catch (error) {
       console.error("Error fetching data:", error);
       document.getElementById("temp").innerText = "Error";
       document.getElementById("humidity").innerText = "Error";
       document.getElementById("gas").innerText = "Error";
+      document.getElementById("soilMoisture").innerText = "Error"; 
   }
 }
 
 // Fetch data every 15 seconds
 setInterval(fetchIoTData, 15000);
 fetchIoTData(); // Fetch immediately on page load
-
-document.addEventListener("DOMContentLoaded", () => {
-  const biorefinerySelect = document.getElementById("biorefinery");
-  const bookingForm = document.getElementById("bookingForm");
-  const responseMessage = document.getElementById("responseMessage");
-
-  // Fetch available biorefineries
-  fetch("http://localhost:3000/api/biorefineries")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((biorefinery) => {
-        const option = document.createElement("option");
-        option.value = biorefinery.name;
-        option.textContent = `${biorefinery.name} (${biorefinery.location})`;
-        biorefinerySelect.appendChild(option);
-      });
-    })
-    .catch((error) => console.error("Error fetching biorefineries:", error));
-
-  // Handle form submission
-  bookingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const formData = {
-      farmerName: document.getElementById("farmerName").value,
-      wasteType: document.getElementById("wasteType").value,
-      wasteAmount: document.getElementById("wasteAmount").value,
-      location: document.getElementById("location").value,
-      biorefinery: document.getElementById("biorefinery").value,
-    };
-
-    fetch("http://localhost:3000/api/book", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        responseMessage.textContent = data.message;
-        bookingForm.reset();
-      })
-      .catch((error) => {
-        responseMessage.textContent = "Error submitting booking.";
-        console.error("Error:", error);
-      });
-  });
-});

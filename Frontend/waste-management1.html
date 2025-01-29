@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composting Guide</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0fff0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .section {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #388e3c;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background: #388e3c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #2c6b29;
+            transform: translateY(-2px);
+        }
+        .search-box {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            border-color: #388e3c;
+        }
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .result-box h3 {
+            color: #2e7d32;
+        }
+        .result-box ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+        .result-box ul li {
+            margin-bottom: 8px;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .header {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Compost Section -->
+        <div class="section">
+            <div class="header">
+                <h2>♻ Compost Your Waste</h2>
+                <button onclick="showCompost()">Search Waste</button>
+            </div>
+            <div class="search-box" id="compostBox">
+                <input type="text" id="wasteInput" list="wasteOptions" placeholder="Enter waste type">
+                <datalist id="wasteOptions">
+                    <option value="Fruits">
+                    <option value="Vegetables">
+                    <option value="Eggshells">
+                    <option value="Coffee Grounds">
+                    <option value="Tea Bags">
+                    <option value="Leaves">
+                    <option value="Corn Cobs">
+                    <option value="Bread">
+                    <option value="Pasta">
+                    <option value="Rice">
+                    <option value="Nut Shells">
+                </datalist>
+                <button onclick="showCompostMethods()">See Compost Methods</button>
+            </div>
+            <div class="result-box" id="compostResult"></div>
+        </div>
+    </div>
+
+    <script>
+        function showCompost() {
+            document.getElementById('compostBox').style.display = 'block';
+        }
+
+        function showCompostMethods() {
+            let waste = document.getElementById('wasteInput').value.toLowerCase();
+            let compostResult = document.getElementById('compostResult');
+
+            let methods = {
+                "fruits": `<h3>How to Compost Fruits:</h3>
+                <ul>
+                    <li>Chop fruit scraps into small pieces for faster decomposition.</li>
+                    <li>Mix with dry leaves to balance moisture.</li>
+                    <li>Layer with brown materials to avoid fruit flies.</li>
+                    <li>Balance acidic fruits with high-carbon materials like cardboard.</li>
+                    <li>Avoid citrus fruits if you have a worm bin.</li>
+                    <li>Ensure fruit scraps are fully decomposed to avoid odor.</li>
+                    <li>Keep the compost pile moist but not soggy.</li>
+                    <li>Turn the pile regularly to improve airflow.</li>
+                    <li>Be mindful of overripe fruit as it may attract pests.</li>
+                    <li>Use a compost bin to keep fruit scraps contained and controlled.</li>
+                </ul>`,
+                "vegetables": `<h3>How to Compost Vegetables:</h3>
+                <ul>
+                    <li>Shred vegetable scraps for faster breakdown.</li>
+                    <li>Mix with dry brown materials like leaves or paper.</li>
+                    <li>Turn the compost pile weekly for aeration.</li>
+                    <li>Keep a balance of green and brown materials for optimal composting.</li>
+                    <li>Avoid composting oily or greasy vegetables.</li>
+                    <li>Use vegetable scraps in worm composting for rich humus.</li>
+                    <li>Ensure you mix in a variety of vegetable scraps for diversity.</li>
+                    <li>Chop large vegetable scraps into smaller pieces for quicker decomposition.</li>
+                    <li>Avoid composting vegetable peels with pesticides.</li>
+                    <li>Maintain the moisture level to keep bacteria thriving.</li>
+                </ul>`,
+                "eggshells": `<h3>How to Compost Eggshells:</h3>
+                <ul>
+                    <li>Crush eggshells before adding to compost.</li>
+                    <li>Dry them in the sun to speed up breakdown.</li>
+                    <li>Mix with coffee grounds for nitrogen balance.</li>
+                    <li>Eggshells can also be used to deter pests in the garden.</li>
+                    <li>Grind shells into powder for a finer mix.</li>
+                    <li>Mix eggshells with other materials to reduce their impact on pH.</li>
+                    <li>Incorporate eggshells into your soil for calcium enrichment.</li>
+                    <li>Store eggshells in a dry place until ready to compost.</li>
+                    <li>Avoid adding too many eggshells to avoid imbalance.</li>
+                    <li>Layer eggshells with other compostable materials.</li>
+                </ul>`,
+                "coffee grounds": `<h3>How to Compost Coffee Grounds:</h3>
+                <ul>
+                    <li>Mix coffee grounds with dry leaves to balance moisture.</li>
+                    <li>Use in worm composting as worms love coffee grounds.</li>
+                    <li>Limit coffee addition to 20% of total compost to avoid over-acidity.</li>
+                    <li>Ensure coffee grounds are mixed well with other materials.</li>
+                    <li>Use a compost tumbler to reduce odor.</li>
+                    <li>Mix grounds with wood chips for a better carbon-nitrogen balance.</li>
+                    <li>Stir the pile regularly to promote decomposition.</li>
+                    <li>Do not add too much coffee at once, as it can be too acidic.</li>
+                    <li>Keep coffee grounds in a separate compost bin for controlled use.</li>
+                    <li>Use coffee grounds to improve soil drainage when used as mulch.</li>
+                </ul>`,
+                "tea bags": `<h3>How to Compost Tea Bags:</h3>
+                <ul>
+                    <li>Remove staples from tea bags before composting.</li>
+                    <li>Mix with fruit scraps for a nutrient-rich compost.</li>
+                    <li>Be mindful of synthetic materials in some tea bags (opt for biodegradable ones).</li>
+                    <li>Use tea bags as a source of nitrogen for compost.</li>
+                    <li>Steep tea bags in water before composting to release nutrients.</li>
+                    <li>Shred the bags to break them down faster.</li>
+                    <li>Mix tea bags with other green waste for balance.</li>
+                    <li>Do not overload the pile with too many tea bags at once.</li>
+                    <li>Use tea bags to balance pH in compost piles.</li>
+                    <li>Consider drying the tea bags before adding them to reduce moisture.</li>
+                </ul>`,
+                "leaves": `<h3>How to Compost Leaves:</h3>
+                <ul>
+                    <li>Shred leaves into smaller pieces to speed up decomposition.</li>
+                    <li>Mix leaves with green materials to create a balanced compost pile.</li>
+                    <li>Turn the pile frequently to promote airflow and prevent matting.</li>
+                    <li>Keep the pile moist but not soggy.</li>
+                    <li>Layer leaves with food scraps for better decomposition.</li>
+                    <li>Use autumn leaves as a rich source of carbon.</li>
+                    <li>Use leaves as mulch after composting for added benefits.</li>
+                    <li>Avoid using leaves from trees that are treated with pesticides.</li>
+                    <li>Dry leaves in the sun if they’re too wet to compost.</li>
+                    <li>Incorporate crushed leaves into garden soil for added nutrients.</li>
+                </ul>`,
+                "corn cobs": `<h3>How to Compost Corn Cobs:</h3>
+                <ul>
+                    <li>Break corn cobs into smaller pieces for quicker decomposition.</li>
+                    <li>Mix with nitrogen-rich materials like vegetable scraps.</li>
+                    <li>Shred the cobs before adding to compost to aid breakdown.</li>
+                    <li>Mix with dry, brown materials to balance moisture levels.</li>
+                    <li>Turn the compost pile regularly to promote aeration.</li>
+                </ul>`,
+                "bread": `<h3>How to Compost Bread:</h3>
+                <ul>
+                    <li>Break bread into small pieces for faster breakdown.</li>
+                    <li>Mix with brown materials like leaves or cardboard to balance moisture.</li>
+                    <li>Ensure bread does not become soggy in the compost pile.</li>
+                    <li>Avoid adding too much bread, as it may attract pests.</li>
+                    <li>Turn the compost pile regularly to prevent mold formation.</li>
+                </ul>`,
+                "pasta": `<h3>How to Compost Pasta:</h3>
+                <ul>
+                    <li>Break pasta into smaller pieces for quicker decomposition.</li>
+                    <li>Mix pasta with other food scraps for balance.</li>
+                    <li>Avoid adding pasta that has been cooked with oils or sauces.</li>
+                    <li>Use pasta as a carbon source when mixed with green materials.</li>
+                </ul>`,
+                "rice": `<h3>How to Compost Rice:</h3>
+                <ul>
+                    <li>Break rice into smaller portions to accelerate decomposition.</li>
+                    <li>Mix rice with dry, carbon-rich materials like leaves or straw.</li>
+                    <li>Ensure rice is fully mixed into the compost pile to avoid clumping.</li>
+                    <li>Avoid adding rice that has been cooked with oils or sauces.</li>
+                </ul>`,
+                "nut shells": `<h3>How to Compost Nut Shells:</h3>
+                <ul>
+                    <li>Crush nut shells before adding them to compost.</li>
+                    <li>Mix nut shells with other materials to balance nitrogen levels.</li>
+                    <li>Avoid adding large amounts of nut shells at once.</li>
+                    <li>Use nut shells to add structure to compost piles and improve aeration.</li>
+                    <li>Turn the pile regularly to ensure thorough decomposition.</li>
+                </ul>`
+            };
+
+            if (methods[waste]) {
+                compostResult.innerHTML = methods[waste];
+                compostResult.style.display = 'block';
+            } else {
+                compostResult.innerHTML = "<p>Sorry, no information available for this waste type. Please try another one!</p>";
+                compostResult.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
