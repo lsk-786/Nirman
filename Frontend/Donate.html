@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now</title>
+    <style>
+        body {
+            background: url('assets/icons/farming2.jpg') no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  padding: 7rem 2rem;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-blend-mode:normal;
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+/* Header with shadow effect */
+header {
+    background: linear-gradient(to right, #02240b, #b0e57c);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Navigation styles */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.nav-links a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #040504;
+    transform: scale(1.1);
+}
+
+/* Centered main container with animation */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 600px;
+    background: rgba(24, 42, 30, 0.95);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 100px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Donation button with animation */
+.btn-donate {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn-donate:hover {
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form input styling */
+input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 8px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Booking button */
+.btn-book {
+    background: linear-gradient(45deg, #008CBA, #007bb5);
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.btn-book:hover {
+    background: linear-gradient(45deg, #007bb5, #008CBA);
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1 class="logo">Donate Now</h1>
+            <p>Your support can make a difference!</p>
+            <nav class="nav-links">
+                <a href="smart-agriculture.html">Demand Data</a>
+                <a href="Donate.html">Donate Now</a>
+                <a href="waste-management1.html">Waste Management</a>
+                <a href="labour.html">Find Skilled Labour</a>
+                <a href="storage.html">Find Cold Storage</a>
+                <a href="courses.html">Smart Farming Techniques</a>
+                <a href="weather.html">Weather </a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+
+    </header>
+
+    <div class="container">
+        <div class="donation-intro">
+            <h3>Why Donate?</h3>
+            <p>Your donation will directly help those in need by providing essential resources, meals, and support to
+                individuals facing difficult times. Every contribution, big or small, makes a difference. Together, we
+                can create a positive impact and improve lives.</p>
+        </div>
+
+        <button class="btn-donate" onclick="showForm()">Donate Now</button>
+
+        <div id="donationForm" style="display:none;">
+            <h2>Donation Form</h2>
+            <form id="donationFormContent">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gmail">Gmail</label>
+                    <input type="email" id="gmail" name="gmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupDate">Pick-Up Date</label>
+                    <input type="date" id="pickupDate" name="pickupDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category of Food</label>
+                    <select id="category" name="category" required>
+                        <option value="vegan">Vegan</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="non-veg">Non-Veg</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn-book" onclick="submitForm()">Book Now</button>
+            </form>
+        </div>
+
+        <div id="confirmationMessage" class="confirmation">
+            <p>Your booking is done! Thank you for your donation.</p>
+        </div>
+
+        <div class="trust-section">
+            <h4>Why Choose Us?</h4>
+            <p>Our platform is built on trust, transparency, and impact. We ensure that every donation goes directly to
+                those who need it most. We partner with verified charities, ensuring that your contribution makes a real
+                difference in the lives of others.</p>
+        </div>
+    </div>
+
+    <script>
+        function showForm() {
+            // Hide the donation button and show the form
+            document.querySelector('.btn-donate').style.display = 'none';
+            document.getElementById("donationForm").style.display = "block";
+        }
+
+        function submitForm() {
+            // Hide the donation form and show the confirmation message
+            document.getElementById("donationForm").style.display = "none";
+            document.getElementById("confirmationMessage").style.display = "block";
+        }
+    </script>
+
+</body>
+
+</html>

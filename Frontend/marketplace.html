@@ -14,18 +14,59 @@
     }
 
     body {
-      background-color: #f9f9f9;
-      color: #333;
-      font-size: 18px;
-    }
+  background-image: url(assets/icons/farming2.jpg);
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 18px;
+  background-size: cover; /* Ensures the image covers the entire screen */
+  background: url(assets/icons/farming2.jpg) no-repeat center center/cover;
+  background-attachment: fixed;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+   
+}
+
 
     header {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 28px;
-    }
+  background: linear-gradient(to right, #02240b, #b0e57c);
+  padding: 2rem 2rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Center the Logo */
+  header .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  }
+  
+  /* Center the Nav Links */
+  header .nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+  }
+  
+  header .nav-links a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.3s ease, transform 0.2s ease;
+  }
+  
+  header .nav-links a:hover {
+  color: #040504;
+  transform: scale(1.1);
+  }
+  
 
     main {
       width: 90%;
@@ -111,7 +152,19 @@
 </head>
 <body>
   <header>
-    Marketplace - Farmer & Distributor Interface
+    <div class="header-container">
+      <h1 class="logo">Sow & Serve</h1>
+      <nav class="nav-links">
+        <a href="smart-agriculture.html">Demand Data</a>
+        <a href="Donate.html">Donate Now</a>
+        <a href="waste-management1.html">Waste Management</a>
+        <a href="labour.html">Find Skilled Labour</a>
+        <a href="storage.html">Find Cold Storage</a>
+        <a href="courses.html">Smart Farming Techniques</a>
+        <a href="weather.html">Weather </a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
   </header>
 
   <main>
