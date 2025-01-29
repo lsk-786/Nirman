@@ -6,98 +6,209 @@
   <title>Login & Registration</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login & Registration</title>
-  <link rel="stylesheet" href="styles.css">
+    /* General Styling */
+    body {
+      background: url("assets/icons/login-bg.png") no-repeat center center/cover;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 80px; /* Ensures space for the fixed header */
+    }
+
+    /* Header Styling */
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to right, #02240b, #b0e57c);
+      padding: 1rem 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+    }
+
+    header .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    header .nav-links a {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    header .nav-links a:hover {
+      color: #040504;
+      transform: scale(1.1);
+    }
+
+    /* Enlarged Login Box */
+    .card {
+      background: linear-gradient(to bottom, #d4edda, #a8e6cf);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 450px; /* Increased width */
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    /* GIF Box */
+    .gif-box {
+      width: 100px;
+      height: 100px;
+      margin: 15px auto;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .gif-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Toggle Buttons */
+    .toggle-buttons button {
+      padding: 12px 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px; /* Increased font size */
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-buttons .active {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .toggle-buttons button:hover {
+      background-color: #218838;
+      color: white;
+    }
+
+    /* Enlarged Input Fields */
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 18px; /* Increased font size */
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    input:focus {
+      box-shadow: 0 0 12px rgba(40, 167, 69, 0.8);
+      outline: none;
+    }
+
+    /* Enlarged Buttons */
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px; /* Increased font size */
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    /* Hidden Form */
+    .hidden {
+      display: none;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="marketplace.html">Marketplace</a>
-    <a href="waste-management.html">Waste Management</a>
-    <a href="labour.html">Find Labours</a>
-  </nav>
 
-  <div class="gif-box">
-    <img src="your-gif.gif" alt="GIF Placeholder">
-  </div>
+  <!-- Header -->
+  <header>
+    <h1 class="logo">Sow & Serve</h1>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>  
+      <a href="smart-agriculture.html">Demand Data</a>
+      <a href="Donate.html">Donate Now</a>
+      <a href="waste-management1.html">Waste Management</a>
+      <a href="labour.html">Find Skilled Labour</a>
+      <a href="storage.html">Find Cold Storage</a>
+      <a href="courses.html">Smart Farming Techniques</a>
+      <a href="weather.html">Weather</a>
+      
+    </nav>
+  </header>
 
-  <div class="card">
+  <!-- Enlarged Login/Registration Card -->
+  <div class="card fade-in">
+    <div class="gif-box">
+      <img src="assets/icons/login-hero.gif" alt="Loading GIF">
+    </div>
+
+    <h2 style="font-size: 22px;">New users must register first</h2>
+
     <div class="toggle-buttons">
       <button id="login-btn" class="active">Login</button>
       <button id="register-btn">Register</button>
     </div>
-    <form id="login-form" class="active">
-      <input type="text" placeholder="Username" required />
-      <input type="password" placeholder="Password" required />
+
+    <!-- Enlarged Login Form -->
+    <form id="login-form" class="fade-in">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
-    <form id="register-form">
-      <input type="text" placeholder="Username" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
+
+    <!-- Enlarged Registration Form -->
+    <form id="register-form" class="hidden fade-in">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Confirm Password" required>
       <button type="submit">Register</button>
     </form>
-  </div>
-
-  <script src="scripts.js"></script>
-</body>
-</html>
-
-  </style>
-</head>
-<body class="h-screen w-screen bg-cover bg-center relative" style="background-image: url('background.jpg');">
-
-  <!-- Navbar -->
-  <nav class="absolute top-0 left-0 w-full flex justify-center bg-opacity-70 bg-gray-800 text-white py-4 shadow-lg">
-    <a href="index.html" class="mx-4 hover:text-green-400">Home</a>
-    <a href="marketplace.html" class="mx-4 hover:text-green-400">Marketplace</a>
-    <a href="waste-management.html" class="mx-4 hover:text-green-400">Waste Management</a>
-    <a href="labour.html" class="mx-4 hover:text-green-400">Find Labours</a>
-  </nav>
-
-  <!-- Main Container -->
-  <div class="flex flex-col items-center justify-center h-full">
-    <!-- GIF Box -->
-    <div class="mb-8 w-48 h-48 bg-white border border-gray-300 rounded-full overflow-hidden shadow-lg animate-pulse">
-      <img src="your-gif.gif" alt="GIF" class="w-full h-full object-cover">
-    </div>
-
-    <!-- Login/Registration Card -->
-    <div class="bg-white rounded-2xl shadow-2xl p-8 w-96 backdrop-blur-md bg-opacity-90">
-      <div class="text-center mb-6">
-        <button id="login-btn" class="text-lg font-semibold px-4 py-2 focus:outline-none border-b-2 border-green-500">
-          Login
-        </button>
-        <button id="register-btn" class="text-lg font-semibold px-4 py-2 focus:outline-none border-b-2 border-transparent hover:border-green-500">
-          Register
-        </button>
-      </div>
-
-      <!-- Login Form -->
-      <form id="login-form" class="space-y-4 fade-in">
-        <input type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <input type="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
-          Login
-        </button>
-      </form>
-
-      <!-- Registration Form -->
-      <form id="register-form" class="hidden space-y-4 fade-in">
-        <input type="text" placeholder="Full Name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <input type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <input type="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <input type="password" placeholder="Confirm Password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
-          Register
-        </button>
-      </form>
-    </div>
   </div>
 
   <!-- JavaScript -->
@@ -108,19 +219,19 @@
     const loginBtn = document.getElementById("login-btn");
     const registerBtn = document.getElementById("register-btn");
 
-    // Toggle between forms
+    // Toggle Forms
     loginBtn.addEventListener("click", () => {
       loginForm.classList.remove("hidden");
       registerForm.classList.add("hidden");
-      loginBtn.classList.add("border-green-500");
-      registerBtn.classList.remove("border-green-500");
+      loginBtn.classList.add("active");
+      registerBtn.classList.remove("active");
     });
 
     registerBtn.addEventListener("click", () => {
       registerForm.classList.remove("hidden");
       loginForm.classList.add("hidden");
-      registerBtn.classList.add("border-green-500");
-      loginBtn.classList.remove("border-green-500");
+      registerBtn.classList.add("active");
+      loginBtn.classList.remove("active");
     });
 
     // Handle form submissions
@@ -134,5 +245,6 @@
       alert("Registration Successful!");
     });
   </script>
+
 </body>
 </html>
