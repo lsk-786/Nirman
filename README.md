@@ -1,5 +1,9 @@
 ﻿# Nirman
 
+PPT -LINK : https://drive.google.com/file/d/1bhvyZWz54w2r91SI09OLloZJ4s6HlJBS/view?usp=sharing
+Website overview: https://drive.google.com/file/d/1JKUfcLb6SYmiM0LHSklFvnBZIx3iYpa7/view?usp=sharing
+
+
 📌 Overview
 This project is a technology-driven food optimization platform designed to enhance food security, reduce waste, and empower farmers. It provides AI-powered demand prediction, a marketplace for direct trade, waste management solutions, and smart farming education to optimize agricultural supply chains.
 
